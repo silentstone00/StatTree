@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("leetcodeUsername") var username: String = ""
+    @AppStorage("Username") var username: String = ""
     @State private var isUsernameSet: Bool = false
 
     var body: some View {
@@ -47,7 +47,7 @@ struct ContentView: View {
 
     private func scheduleDailyReminder() {
         let content = UNMutableNotificationContent()
-        content.title = "LeetCode Daily Challenge"
+        content.title = "Daily Challenge"
         content.body = "Don't forget to solve today's problem!"
         content.sound = UNNotificationSound.default
 
@@ -83,7 +83,7 @@ struct UsernameInputView: View {
                         .font(.system(size: 80))
                         .foregroundColor(.blue)
                     
-                    Text("LeetCode Tracker")
+                    Text("Tracker")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -91,7 +91,7 @@ struct UsernameInputView: View {
                 
                 // Input Section
                 VStack(spacing: 20) {
-                    Text("Enter your LeetCode username")
+                    Text("Enter your username")
                         .font(.headline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("leetcodeUsername") var username: String = ""
+    @AppStorage("Username") var username: String = ""
     @AppStorage("notificationsEnabled") var notificationsEnabled: Bool = true
     @State private var showingLogoutAlert = false
     

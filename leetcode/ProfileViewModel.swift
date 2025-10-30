@@ -7,7 +7,7 @@ class ProfileViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var error: Error?
     
-    @AppStorage("leetcodeUsername") var username: String = ""
+    @AppStorage("Username") var username: String = ""
     
     func fetchProfile() {
         guard !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
@@ -17,7 +17,7 @@ class ProfileViewModel: ObservableObject {
             return
         }
         isLoading = true
-        LeetCodeAPI.shared.fetchUserProfile(username: username) { result in
+        CodeAPI.shared.fetchUserProfile(username: username) { result in
             DispatchQueue.main.async {
                 self.isLoading = false
                 switch result {
@@ -44,7 +44,7 @@ class ProfileViewModel: ObservableObject {
         
         do {
             let prof = try await withCheckedThrowingContinuation { continuation in
-                LeetCodeAPI.shared.fetchUserProfile(username: username) { result in
+                CodeAPI.shared.fetchUserProfile(username: username) { result in
                     continuation.resume(with: result)
                 }
             }

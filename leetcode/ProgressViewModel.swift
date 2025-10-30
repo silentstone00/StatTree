@@ -1,6 +1,5 @@
 //
 //  ProgressViewModel.swift
-//  leetcode
 //
 //  Created by Aviral Saxena on 8/29/25.
 //
@@ -19,7 +18,7 @@ class ProgressViewModel: ObservableObject {
     @Published var error: Error?
     @Published var tagProblemCounts: TagProblemCounts?
     
-    @AppStorage("leetcodeUsername") var username: String = ""
+    @AppStorage("Username") var username: String = ""
     
     var currentStreak: Int {
         // Calculate current streak from calendar data
@@ -122,7 +121,7 @@ class ProgressViewModel: ObservableObject {
         error = nil
         
         // Fetch user profile with submission calendar
-        LeetCodeAPI.shared.fetchUserProfile(username: username) { result in
+        CodeAPI.shared.fetchUserProfile(username: username) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let profile):
@@ -138,7 +137,7 @@ class ProgressViewModel: ObservableObject {
     }
     
     private func fetchTagProblemCounts() {
-        LeetCodeAPI.shared.fetchTagProblemCounts(username: username) { result in
+        CodeAPI.shared.fetchTagProblemCounts(username: username) { result in
             DispatchQueue.main.async {
                 self.isLoading = false
                 switch result {

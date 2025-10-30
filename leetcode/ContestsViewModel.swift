@@ -9,11 +9,11 @@ class ContestsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var error: Error?
     
-    @AppStorage("leetcodeUsername") var username: String = ""
+    @AppStorage("Username") var username: String = ""
     
     func fetchContests() {
         isLoading = true
-        LeetCodeAPI.shared.fetchContests { result in
+        CodeAPI.shared.fetchContests { result in
             DispatchQueue.main.async {
                 if case .success(let contests) = result {
                     self.upcomingContests = contests.filter { Date(timeIntervalSince1970: Double($0.startTime)) > Date() }
@@ -24,7 +24,7 @@ class ContestsViewModel: ObservableObject {
                 }
             }
         }
-        LeetCodeAPI.shared.fetchContestHistory(username: username) { result in
+        CodeAPI.shared.fetchContestHistory(username: username) { result in
             DispatchQueue.main.async {
                 self.isLoading = false
                 if case .success(let history) = result {
@@ -42,7 +42,7 @@ class ContestsViewModel: ObservableObject {
         
         do {
             let contests = try await withCheckedThrowingContinuation { continuation in
-                LeetCodeAPI.shared.fetchContests { result in
+                CodeAPI.shared.fetchContests { result in
                     continuation.resume(with: result)
                 }
             }
@@ -55,7 +55,7 @@ class ContestsViewModel: ObservableObject {
             }
             
             let history = try await withCheckedThrowingContinuation { continuation in
-                LeetCodeAPI.shared.fetchContestHistory(username: username) { result in
+                CodeAPI.shared.fetchContestHistory(username: username) { result in
                     continuation.resume(with: result)
                 }
             }
@@ -72,7 +72,7 @@ class ContestsViewModel: ObservableObject {
     
     private func scheduleContestNotification(contest: Contest) {
         let content = UNMutableNotificationContent()
-        content.title = "LeetCode Contest"
+        content.title = "Contest"
         content.body = "\(contest.title) starts soon!"
         content.sound = UNNotificationSound.default
         

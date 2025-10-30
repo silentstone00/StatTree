@@ -1,8 +1,8 @@
 // LeetCodeAPI.swift
 import Foundation
 
-class LeetCodeAPI {
-    static let shared = LeetCodeAPI()
+class CodeAPI {
+    static let shared = CodeAPI()
     
     private let baseURL = URL(string: "https://leetcode.com/graphql")!
     

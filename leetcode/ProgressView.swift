@@ -1,6 +1,5 @@
 //
 //  ProgressView.swift
-//  leetcode
 //
 //  Created by Aviral Saxena on 8/29/25.
 //

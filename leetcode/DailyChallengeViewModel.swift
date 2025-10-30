@@ -16,7 +16,7 @@ class DailyChallengeViewModel: ObservableObject {
         isLoading = true
         isLoadingDetail = true
         
-        LeetCodeAPI.shared.fetchDailyChallenge { result in
+        CodeAPI.shared.fetchDailyChallenge { result in
             DispatchQueue.main.async {
                 self.isLoading = false
                 switch result {
@@ -40,7 +40,7 @@ class DailyChallengeViewModel: ObservableObject {
         do {
             // Fetch both challenge and problem detail in parallel
             async let challengeTask = withCheckedThrowingContinuation { continuation in
-                LeetCodeAPI.shared.fetchDailyChallenge { result in
+                CodeAPI.shared.fetchDailyChallenge { result in
                     continuation.resume(with: result)
                 }
             }
@@ -73,7 +73,7 @@ class DailyChallengeViewModel: ObservableObject {
         }
         
         isLoadingDetail = true
-        LeetCodeAPI.shared.fetchProblemDetail(titleSlug: titleSlug) { result in
+        CodeAPI.shared.fetchProblemDetail(titleSlug: titleSlug) { result in
             DispatchQueue.main.async {
                 self.isLoadingDetail = false
                 switch result {
@@ -105,7 +105,7 @@ class DailyChallengeViewModel: ObservableObject {
         
         do {
             let detail = try await withCheckedThrowingContinuation { continuation in
-                LeetCodeAPI.shared.fetchProblemDetail(titleSlug: titleSlug) { result in
+                CodeAPI.shared.fetchProblemDetail(titleSlug: titleSlug) { result in
                     continuation.resume(with: result)
                 }
             }

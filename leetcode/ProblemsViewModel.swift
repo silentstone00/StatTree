@@ -1,6 +1,5 @@
 //
 //  ProblemsViewModel.swift
-//  leetcode
 //
 //  Created by Aviral Saxena on 8/29/25.
 //
@@ -29,7 +28,7 @@ class ProblemsViewModel: ObservableObject {
     private var lastDifficulty: String? = nil
     private var lastTag: String? = nil
     
-    @AppStorage("leetcodeUsername") var username: String = ""
+    @AppStorage("Username") var username: String = ""
     
     func fetchProblems(difficulty: String? = nil, tag: String? = nil, reset: Bool = true) {
         // Check if this is a new search/filter - if so, reset pagination
@@ -67,7 +66,7 @@ class ProblemsViewModel: ObservableObject {
         lastDifficulty = difficulty
         lastTag = tag
         
-        LeetCodeAPI.shared.fetchProblems(
+        CodeAPI.shared.fetchProblems(
             limit: pageSize,
             skip: currentSkip,
             filters: filters
@@ -98,7 +97,7 @@ class ProblemsViewModel: ObservableObject {
     
     func fetchSolved() {
         guard !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-        LeetCodeAPI.shared.fetchUserSolvedProblems(username: username) { result in
+        CodeAPI.shared.fetchUserSolvedProblems(username: username) { result in
             DispatchQueue.main.async {
                 if case .success(let slugs) = result {
                     self.solvedSlugs = Set(slugs)

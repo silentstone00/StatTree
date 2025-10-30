@@ -514,7 +514,7 @@ struct ProblemDetailView: View {
         }
         .navigationTitle(detail?.title ?? "Problem")
         .onAppear {
-            LeetCodeAPI.shared.fetchProblemDetail(titleSlug: titleSlug) { result in
+            CodeAPI.shared.fetchProblemDetail(titleSlug: titleSlug) { result in
                 DispatchQueue.main.async {
                     self.isLoading = false
                     switch result {

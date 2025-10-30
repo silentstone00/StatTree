@@ -2,7 +2,7 @@
 import SwiftUI
 
 @main
-struct LeetCodeApp: App {
+struct StatTree: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
